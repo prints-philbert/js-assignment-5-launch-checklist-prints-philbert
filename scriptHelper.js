@@ -61,10 +61,12 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 
     launchStatus.innerHTML = "Shuttle Not Ready for Launch";
     launchStatus.color = 'red';
-    faultyItems.visibility = 'visible';
-    console.log(faultyItems.visibility);
-    console.log(pilotStatus.innerHTML);
-    faultyItems.innerHTML += `
+    console.log(faultyItems);
+    list.visibility = 'visible';
+    console.log(list.visibility);
+    pilotStatus.innerHTML = `Pilot ${pilot.value}")} is ready for launch`;
+    console.log(pilot.value);
+    faultyItems.value += `
         <div  id="faultyItems" data-testid="faultyItems">
                 <ol>
                     <li id="pilotStatus" data-testid="pilotStatus">Pilot ${document.querySelector("input[name=pilotName]")} is ready for launch</li>
