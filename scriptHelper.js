@@ -52,10 +52,32 @@ If the shuttle is ready to launch, change the text of launchStatus to green and 
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     
+    let launchStatus = document.getElementById("launchStatus");
+    let faultyItems = document.getElementById("faultyItems");
     let pilotStatus = document.getElementById("pilotStatus");
     let copilotStatus = document.getElementById("copilotStatus");
     let fuelStatus = document.getElementById("fuelStatus");
     let cargoStatus = document.getElementById("cargoStatus");
+
+    launchStatus.innerHTML = "Shuttle Not Ready for Launch";
+    launchStatus.color = 'red';
+    faultyItems.visibility = 'visible';
+    console.log(faultyItems.visibility);
+    console.log(pilotStatus.innerHTML);
+    faultyItems.innerHTML += `
+        <div  id="faultyItems" data-testid="faultyItems">
+                <ol>
+                    <li id="pilotStatus" data-testid="pilotStatus">Pilot ${document.querySelector("input[name=pilotName]")} is ready for launch</li>
+                    <li id="copilotStatus" data-testid="copilotStatus">Co-pilot Ready</li>
+                    <li id="fuelStatus" data-testid="fuelStatus">Fuel level high enough for launch</li>
+                    <li id="cargoStatus" data-testid="cargoStatus">Cargo mass low enough for launch</li>
+                </ol>
+        </div>
+           
+    `;
+
+
+
 
 }
 

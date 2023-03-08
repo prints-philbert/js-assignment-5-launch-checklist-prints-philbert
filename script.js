@@ -9,11 +9,12 @@ window.addEventListener("load", function() {
     let copilotInput = document.querySelector("input[name=copilotName]");
     let fuelInput = document.querySelector("input[name=fuelLevel]");
     let cargoInput = document.querySelector("input[name=cargoMass]");
+    let list = document.querySelector("faultyItems");
 
     form.addEventListener("submit", function(event) {
         event.preventDefault();
-        
         console.log(pilotInput.value, copilotInput.value, fuelInput.value, cargoInput.value);
+        formSubmission(document, list, pilotInput, copilotInput, fuelInput, cargoInput);
     });
 });
 
