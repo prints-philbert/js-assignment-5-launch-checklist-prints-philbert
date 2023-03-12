@@ -40,7 +40,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     if (validateInput(pilot) === "Empty" || validateInput(copilot) === "Empty" || validateInput(fuelLevel) === "Empty" || validateInput(cargoLevel) === "Empty") {
         alert("Please include an input for each field.");
     } else if (validateInput(pilot) === "Is a Number" || validateInput(copilot) === "Is a Number" || validateInput(fuelLevel) === "Not a Number" || validateInput(cargoLevel) === "Not a Number") {
-        alert("Please enter a valid names and valid inputs for fuel level and cargo level.");
+        alert("Please enter valid names and valid inputs for fuel level and cargo level.");
     } else {
             list.style.visibility = 'visible';
             
@@ -52,29 +52,33 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
                 launchStatus.style.color = "red";
                 if ( fuelLevel < 10000 ) {
                     fuelStatus.innerHTML = "Not enough fuel for launch";
-                } else if ( cargoLevel > 10000 ) {
-                    cargoStatus.innerHTML = "Cargo mass too heavy for launch"
+                } else {
+                    fuelStatus.innerHTML = "Fuel level high enough for launch";
+
                 }
-            } else {
+                if ( cargoLevel > 10000 ) {
+                    cargoStatus.innerHTML = "Cargo mass too heavy for launch"
+                } else {
+                    cargoStatus.innerHTML = "Cargo mass low enough for launch"
+
+                }
+            }
+            if ( fuelLevel >= 10000 && cargoLevel <= 10000 ) {
                 launchStatus.innerHTML = "Shuttle ready for launch";
                 launchStatus.style.color = "green";    
-                if ( fuelLevel >= 10000 ) {
-                    fuelStatus.innerHTML = "Fuel level high enough for launch";
-                } else if ( cargoLevel <= 10000 ) {
-                    cargoStatus.innerHTML = "Cargo mass low enough for launch"
-                }
+                fuelStatus.innerHTML = "Fuel level high enough for launch";
+                cargoStatus.innerHTML = "Cargo mass low enough for launch"
             }
     }
 }
 
 async function myFetch() {
-    let planetsReturned = [];
+    let planetsReturned;
 
     planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
-        planetsReturned.push(response.json());
+        return response.json();
         console.log(planetsReturned);
     });
-
     return planetsReturned;
 }
 
