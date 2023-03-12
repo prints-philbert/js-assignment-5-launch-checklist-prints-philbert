@@ -48,11 +48,21 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
             copilotStatus.innerHTML = `Copilot ${copilot} is ready for launch`; 
             
             if ( fuelLevel < 10000 || cargoLevel > 10000 ) {
-                launchStatus.innerHTML = "Shuttle not ready for launch"
+                launchStatus.innerHTML = "Shuttle not ready for launch";
                 launchStatus.style.color = "red";
+                if ( fuelLevel < 10000 ) {
+                    fuelStatus.innerHTML = "Not enough fuel for launch";
+                } else if ( cargoLevel > 10000 ) {
+                    cargoStatus.innerHTML = "Cargo mass too heavy for launch"
+                }
             } else {
-                launchStatus.innerHTML = "Shuttle ready for launch"
+                launchStatus.innerHTML = "Shuttle ready for launch";
                 launchStatus.style.color = "green";    
+                if ( fuelLevel >= 10000 ) {
+                    fuelStatus.innerHTML = "Fuel level high enough for launch";
+                } else if ( cargoLevel <= 10000 ) {
+                    cargoStatus.innerHTML = "Cargo mass low enough for launch"
+                }
             }
     }
 }
@@ -61,7 +71,8 @@ async function myFetch() {
     let planetsReturned = [];
 
     planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
-        response.json()
+        planetsReturned.push(response.json());
+        console.log(planetsReturned);
     });
 
     return planetsReturned;
